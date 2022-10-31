@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Blog";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model mvc.Entities.GuestMessage
+<!-- content begin -->
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+
+    <!-- section begin -->
+    <section id="subheader" class="text-light" data-bgimage="url(images/background/subheader.jpg) bottom">
+        <div class="center-y relative text-center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 text-center">
+                        <h1>Contact</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+    <!-- section begin -->
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <form asp-controller="Contact" asp-action="SendContactReq" id='contact_form' class="form-border" method="post">
+                        <div id="alert-msg" class="alert-msg" asp-validation-summary="All"></div>
+                        <div class="row g-custom-x">
+                            <div class="col-md-12">
+                                <h3>Send Us Message</h3>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id='name_error' class='error'>Please enter your name.</div>
+                                <div>
+                                    <input type='text' asp-for='Name' id='name' class="form-control" placeholder="Your Name" required>
+                                </div>
+
+                                <div id='email_error' class='error'>Please enter your valid E-mail ID.</div>
+                                <div>
+                                    <input type='email' asp-for='Email' id='phone' class="form-control" placeholder="Your Email" required>
+                                </div>
+
+                                <div id='phone_error' class='error'>Please enter your phone number.</div>
+                                <div>
+                                    <input type='text' asp-for='Phone' id='phone' class="form-control" placeholder="Your Phone" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id='message_error' class='error'>Please enter your message.</div>
+                                <div>
+                                    <textarea asp-for='Message' id='message' class="form-control" placeholder="Your Message" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="g-recaptcha" data-sitekey="copy-your-site-key-here"></div>
+                                <p id='submit' class="mt20">
+                                    <input type='submit' id='send_message' value='Submit Form' class="btn btn-main">
+                                </p>
+                                <div id='mail_success' class='success'>Your message has been sent successfully.</div>
+                                <div id='mail_fail' class='error'>Sorry, error occured this time sending your message.</div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="success_message" class='success'>
+                        Your message has been sent successfully. Refresh this page if you want to send more messages.
+                    </div>
+                    <div id="error_message" class='error'>
+                        Sorry there was an error sending your form.
+                    </div>
+
+                </div>
+
+                <div id="sidebar" class="col-md-4">
+
+                    <div class="widget widget_text">
+                        <h3>Contact Info</h3>
+                        <address>
+                            <span><strong>Address:</strong>100 S Main St, Los Angeles, CA</span>
+                            <span><strong>Phone:</strong>(208) 333 9296</span>
+                            <span><strong>Fax:</strong>(208) 333 9298</span>
+                            <span><strong>Email:</strong><a href="mailto:contact@example.com">contact@example.com</a></span>
+                            <span><strong>Web:</strong><a href="#test">http://example.com</a></span>
+                            <span><strong>Open</strong>Sunday - Friday 08:00 - 18:00</span>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!-- content close -->

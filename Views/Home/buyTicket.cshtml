@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model mvc.Entities.GuestTicket
+
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+
+    <!-- section begin -->
+    <section id="subheader" class="text-light" data-bgimage="url(images/background/subheader.jpg) bottom">
+        <div class="center-y relative text-center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 text-center">
+                        <h1>Tickets</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+    <!-- section begin -->
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 offset-md-2">
+                    <form asp-controller="Home" asp-action="BuyTicket" id='contact_form' class="form-border" method="post">
+                        <div id="alert-msg" class="alert-msg" asp-validation-summary="All"></div>
+                        <div class="row g-custom-x align-items-center">
+
+                            <div class="col-md-6">
+                                <h4>Your Name</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' asp-for='Name' id='name' class="form-control" placeholder="Your Name" required>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-6">
+                                <h4>Your Phone</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' asp-for='Phone' id='phone' class="form-control" placeholder="Your Phone" required>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-6">
+                                <h4>Your Email</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='email' asp-for='Email' id='phone' class="form-control" placeholder="Your Email" required>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-6">
+                                <h4>One Day Ticket <span class="id-color">$49.89</span></h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' asp-for='ticketA' id='ticket-a' class="form-control" placeholder="enter quantity" required>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-6">
+                                <h4>Three-days Ticket <span class="id-color">$69.89</span></h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' asp-for='ticketB' id='ticket-b' class="form-control" placeholder="enter quantity" required>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-6">
+                                <h4>All-days Ticket <span class="id-color">$89.89</span></h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' asp-for='ticketC' id='ticket-c' class="form-control" placeholder="enter quantity" required>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="g-recaptcha" data-sitekey="copy-your-site-key-here"></div>
+                                <p id='submit' class="mt20">
+                                    <input type='submit' id='send_message' value='Submit Form' class="btn btn-main">
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="success_message" class='success'>
+                        Your order has been sent, please wait for confirmation. Refresh this page if you want to order more tickets.
+                    </div>
+                    <div id="error_message" class='error'>
+                        Sorry there was an error sending your form.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!-- content close -->
