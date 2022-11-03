@@ -1,0 +1,50 @@
+﻿<!-- content begin -->
+<header class="transparent">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="de-flex sm-pt10">
+                    <div class="de-flex-col">
+                        <div class="de-flex-col">
+                            <!-- logo begin -->
+                            <div id="logo">
+                                <a href="/#de-carousel">
+                                    <img alt="" src="images/logo.png" />
+                                </a>
+                            </div>
+                            <!-- logo close -->
+                        </div>
+                        <div class="de-flex-col">
+                        </div>
+                    </div>
+                    <div class="de-flex-col header-col-mid">
+                        <!-- mainmenu begin -->
+                        <ul id="mainmenu">
+                            @foreach (var elem in Model){
+                            <li><a href=@elem.Href>@elem.Value</a></li>
+                            }
+
+                            <li>
+@*                            <li>
+                                <a href="/">Pages</a>
+                                <ul>
+                                    <li><a href="/Blog">Blog</a></li>
+                                    <li><a href="/Contact">Contact</a></li>
+                                    <li><a href="/Gallery">Gallery</a></li>
+                                </ul>
+                            </li>*@
+
+                        </ul>
+                    </div>
+                    <div class="de-flex-col">
+                        <div class="menu_side_area">
+                            <a href="#section-tickets" class="btn-main"><i class="fa fa-sign-in"></i><span>Buy Ticket</span></a>
+                            <span id="menu-btn"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <!-- content close -->

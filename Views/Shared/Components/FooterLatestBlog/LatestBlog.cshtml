@@ -1,0 +1,9 @@
+﻿<div class="widget">
+    <h5>Latest Blog</h5>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><a href=@item.Href>@item.Value</a></li>
+       }
+    </ul>
+</div>

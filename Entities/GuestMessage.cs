@@ -9,7 +9,7 @@ namespace mvc.Entities
 
         public string Name { get; set; }
    
-        [RegularExpression(@"(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]‌​)\s*)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)([2-9]1[02-9]‌​|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})\s*(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+)\s*)?$")]
+        [RegularExpression(@"^[0-9\-\+]{9,15}$")] 
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Fill email pls, we irl need this")]

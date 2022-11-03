@@ -1,0 +1,38 @@
+﻿<!-- footer begin -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                @await Component.InvokeAsync("FooterContactInfo")
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                @await Component.InvokeAsync("FooterQuickLinks")
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                @await Component.InvokeAsync("FooterLatestBlog")
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                @await Component.InvokeAsync("FooterNewsletter")
+            </div>
+        </div>
+    </div>
+    <div class="subfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="de-flex">
+                        <div class="de-flex-col">
+                            <a href="/">
+                                <img alt="" class="f-logo" src="images/logo.png" /><span class="copy">&copy; Copyright 2022 - Rockfest by Designesia</span>
+                            </a>
+                        </div>
+                        <div class="de-flex-col">
+                            @await Component.InvokeAsync("FooterSocialLinks")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer close -->

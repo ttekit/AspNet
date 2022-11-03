@@ -1,0 +1,21 @@
+﻿<div class="widget">
+    <h5>Contact Info</h5>
+    <address class="s1">
+        @foreach (var item in Model)
+        {
+            <span>
+                <i class="id-color fa @item.Icon fa-lg"></i>
+
+                @if (item.Href.Length >= 2)
+                {
+                    <a href=@item.Href>@item.Value</a>
+                }
+                else
+                {
+                    @item.Value
+                }
+
+            </span>
+        }
+    </address>
+</div>

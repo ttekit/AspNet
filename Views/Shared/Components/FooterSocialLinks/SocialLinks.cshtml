@@ -1,0 +1,6 @@
+﻿<div class="social-icons">
+    @foreach (var item in Model)
+    {
+        <a href=@item.Href><i class="fa @item.Icon fa-lg"></i>@item.Value</a>
+    }
+</div>
