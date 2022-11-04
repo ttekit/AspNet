@@ -1,4 +1,19 @@
-﻿<!-- content begin -->
+﻿@using mvc.Entities
+@using mvc.ViewModels
+
+
+@{
+    void GetNavBarList(List<Options> navElemsArr)
+    {
+    @foreach (var elem in NavBarView.GetNonGroupOptions())
+        {
+    <li><a href=@elem.Href>@elem.Value</a></li>
+        }
+    }
+}
+
+
+<!-- content begin -->
 <header class="transparent">
     <div class="container">
         <div class="row">
@@ -20,19 +35,16 @@
                     <div class="de-flex-col header-col-mid">
                         <!-- mainmenu begin -->
                         <ul id="mainmenu">
-                            @foreach (var elem in Model){
-                            <li><a href=@elem.Href>@elem.Value</a></li>
+                            @{GetNavBarList(NavBarView.GetNonGroupOptions());}
+                            @foreach (var optionsGroup in NavBarView.GetAllGroupedOptions())
+                            {
+                                <li>
+                                    <a href="/">@optionsGroup.Name</a>
+                                    <ul>
+                                        @{GetNavBarList(optionsGroup.GroupedOptions);}
+                                    </ul>
+                                </li>
                             }
-
-                            <li>
-@*                            <li>
-                                <a href="/">Pages</a>
-                                <ul>
-                                    <li><a href="/Blog">Blog</a></li>
-                                    <li><a href="/Contact">Contact</a></li>
-                                    <li><a href="/Gallery">Gallery</a></li>
-                                </ul>
-                            </li>*@
 
                         </ul>
                     </div>
@@ -47,4 +59,4 @@
         </div>
     </div>
 </header>
-        <!-- content close -->
+<!-- content close -->
