@@ -12,6 +12,7 @@ namespace mvc.DB
         public DbSet<Options> Options { get; set; }
         public DbSet<BlogElem> BlogElem { get; set; }
         public DbSet<Comments> Comments { get; set; }
+        public DbSet<UserData> UserData { get; set; }
         public RockfestDB(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 

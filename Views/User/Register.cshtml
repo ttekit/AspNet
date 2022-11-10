@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+
+    <!-- section begin -->
+    <section id="subheader" class="text-light" data-bgimage="url(images/background/subheader.jpg) bottom">
+        <div class="center-y relative text-center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 text-center">
+                        <h1>Register</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+    <!-- section begin -->
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 offset-md-2">
+                    @using (Html.BeginForm("RegisterAction", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "register-form"}))
+                    {
+                        <div id="error-div" class="alert-msg">
+                            <label>Login</label>
+                            <div>
+                                <input type='text' id='login' name="Login" class="form-control" placeholder="Your login" required>
+                            </div>
+                            <label>Email</label>
+                            <div>
+                                <input type='email' id='email' name="Email" class="form-control" placeholder="Your email" required>
+                            </div>
+                                <label>Password</label>
+                            <div> 
+                                <input type='password' id='password' name="Password" class="form-control" placeholder="Your password" required>
+                            </div>                                
+                            <label>Password Confirm</label>
+                            <div>
+                                <input type='password' id='password-confirm' name="PasswordConfirm" class="form-control" placeholder="Confirm password" required>
+                            </div>
+                               <label> </label>
+                            <p id="btnsubmit">
+                                <input type="submit" id="Enter" value="Enter" class="btn btn-main" />
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script src="~/js/regValid.js"></script>
+<!-- content close -->  

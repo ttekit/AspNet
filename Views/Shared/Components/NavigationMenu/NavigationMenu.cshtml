@@ -5,9 +5,9 @@
 @{
     void GetNavBarList(List<Options> navElemsArr)
     {
-    @foreach (var elem in NavBarView.GetNonGroupOptions())
+        @foreach (var elem in NavBarView.GetNonGroupOptions())
         {
-    <li><a href=@elem.Href>@elem.Value</a></li>
+            <li><a href=@elem.Href>@elem.Value</a></li>
         }
     }
 }
@@ -35,7 +35,9 @@
                     <div class="de-flex-col header-col-mid">
                         <!-- mainmenu begin -->
                         <ul id="mainmenu">
-                            @{GetNavBarList(NavBarView.GetNonGroupOptions());}
+                            @{
+                                GetNavBarList(NavBarView.GetNonGroupOptions());
+                            }
                             @foreach (var optionsGroup in NavBarView.GetAllGroupedOptions())
                             {
                                 <li>
@@ -52,10 +54,45 @@
                         </ul>
                     </div>
                     <div class="de-flex-col">
-                        <div class="menu_side_area">
-                            <a href="#section-tickets" class="btn-main"><i class="fa fa-sign-in"></i><span>Buy Ticket</span></a>
-                            <span id="menu-btn"></span>
+
+                        <div class="de-flex-col">
+                            <div class="menu_side_area">
+                                <a href="#section-tickets" class="btn-main"><i class="fa fa-sign-in"></i><span>Buy Ticket</span></a>
+                                <span id="menu-btn"></span>
+                            </div>
                         </div>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">
+                                    <a href="/User/Login" class="btn-main"><i class="fa fa-sign-in"></i><span>Login</span></a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">
+                                    <a href="/User/Register" class="btn-main"><i class="fa fa-sign-in"></i><span>Register</span></a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+                        }else{
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">
+                                    <a href="/Admin" class="btn-main"><i class="fa fa-sign-in"></i><span>Admin panel</span></a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+
+                            <div class="de-flex-col">
+                                <div class="menu_side_area">
+                                    <a href="/User/Logout" class="btn-main"><i class="fa fa-sign-in"></i><span>Logout</span></a>
+                                    <span id="menu-btn"></span>
+                                </div>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>

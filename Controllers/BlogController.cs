@@ -32,7 +32,7 @@ namespace mvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index", GetAllPosts());
         }
 
         [HttpPost]

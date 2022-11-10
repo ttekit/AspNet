@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+
+    <!-- section begin -->
+    <section id="subheader" class="text-light" data-bgimage="url(images/background/subheader.jpg) bottom">
+        <div class="center-y relative text-center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 text-center">
+                        <h1>Login</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+    <!-- section begin -->
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 offset-md-2">
+                    @using (Html.BeginForm("LoginAction", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div id="alert-msg" class="alert-msg" asp-validation-summary="All">
+                            <label>Login</label>
+                            <div>
+                                <input type='text' id='login' name="Login" class="form-control" placeholder="Your login" required>
+                            </div>
+                                <label>Password</label>
+                            <div>
+                                <input type='text' id='Password' name="Password" class="form-control" placeholder="Your password" required>
+                            </div>
+                               <label> </label>
+                            <p id="btnsubmit">
+                                <input type="submit" id="Enter" value="Enter" class="btn btn-main" />
+                            </p>
+                        </div>
+                    }
+
+                    <div id="success_message" class='success'>
+                        Your order has been sent, please wait for confirmation. Refresh this page if you want to order more tickets.
+                    </div>
+                    <div id="error_message" class='error'>
+                        Sorry there was an error sending your form.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!-- content close -->

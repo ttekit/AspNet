@@ -1,48 +1,26 @@
-﻿//$(function () {
+﻿$(document).ready(() => {
+    $.ajax({
+        type: "post",
+        dataType: "json",
+        url: "/Blog/GetAllPosts",
+        success: (response) => {
+            let $container = $(".blogContainer");
+            response.forEach((item, index) => {
+                $container.append(`<div class="col-lg-4 col-md-6 mb20">
+                    <div class="de-event-item">
+                        <div class="d-content">
+                            <div class="d-image">
+                                <span class="d-image-wrap"><img alt="${item.imgAlt}" src="${item.imgSrc}" class="lazy"></span>
+                            </div>
+                            <div class="d-text">
+                                <a href="01_rockfest-blog-single.html"><h4>${item.title}</h4></a>
+                                <p>${item.content}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`)
 
-//    var results = new Array();
-
-//    var emp1 = { "ID": "12", "Name": "Manas" };
-//    results.push(emp1);
-
-//    var emp2 = { "ID": "2", "Name": "Tester" };
-//    results.push(emp2);
-
-//    // Without array you can use like to construct JSON object  
-//    // var results = { empList : [{ "ID": "1", "Name": "Manas" },   
-//    //                            { "ID": "2", "Name": "Tester" }]
-
-//    var postData = { empList: results };
-
-//    $.ajax({
-//        url: 'Blog/AddNewCommentToPost',
-//        data: JSON.stringify(postData),
-//        type: 'POST',
-//        contentType: 'application/json',
-//        dataType: 'json',
-//        beforeSend: function () {
-//            Show(); // Show loader icon  
-//        },
-//        success: function (result) {
-//            alert(result);
-//        },
-//        complete: function () {
-//            Hide(); // Hide loader icon  
-//        },
-//        failure: function (jqXHR, textStatus, errorThrown) {
-//            alert("Status: " + jqXHR.status + "; Error: " + jqXHR.responseText); // Display error message  
-//        }
-//    });
-//});
-
-//$(document).ready(function () {
-//    $("#div_Loader").hide();
-//});
-
-//function Show() {
-//    $('#div_Loader').show();
-//}
-
-//function Hide() {
-//    $('#div_Loader').hide();
-//} 
+            })
+        }
+    })
+})
