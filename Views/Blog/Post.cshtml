@@ -1,0 +1,162 @@
+﻿@using mvc.Entities
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+
+    <!-- section begin -->
+    <section id="subheader" class="text-light">
+        <img class="data-bgimage" src="@Model.BlogData.ImgSrc" alt="@Model.BlogData.ImgAlt" />
+        <div class="center-y relative text-center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h1>@Model.BlogData.Title</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+    <!-- section begin -->
+    <section aria-label="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="blog-read">
+
+                        @Model.BlogData.Content
+
+                    </div>
+
+                    <div class="spacer-single"></div>
+
+                    <div id="blog-comment">
+                        <h4>Comments</h4>
+
+                        <div class="spacer-half"></div>
+
+                        <ol>
+                            @foreach (var item in Model.Comments)
+                            {
+                                <li>
+                                    <div class="avatar">
+                                        <img src="~/images/misc/avatar-2.jpg" alt="" />
+                                    </div>
+                                    <div class="comment-info">
+                                        <span class="c_name">@item.Name</span>
+                                        <span class="c_date id-color">@item.Date</span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="comment">
+                                        @item.Message
+                                    </div>
+                                </li>
+                            }
+
+                        </ol>
+
+                        <div class="spacer-single"></div>
+
+                        <div id="comment-form-wrapper">
+                            <h4>Leave a Comment</h4>
+                            <div class="comment_form_holder">
+                                <div>
+                                    <input type='text' class="form-control d-none" value="@Model.BlogData.Id" required>
+                                </div>
+                                <form asp-controller="Blog" asp-action="AddNewCommentToPost" id='contact_form' class="form-border" method="post">
+                                    <div id="alert-msg" class="alert-msg" asp-validation-summary="All">
+                                        <label>Name</label>
+                                        <div>
+                                            <input type='text' id='name' class="form-control" placeholder="Your Name" required>
+                                        </div>
+
+                                        <div>
+                                            <input type='text' id='Email' class="form-control" placeholder="Your Email" required>
+                                        </div>
+
+                                        <label>Message <span class="req">*</span></label>
+
+                                        <div>
+                                            <textarea id='message' class="form-control" placeholder="Your Message" required></textarea>
+                                        </div>
+
+                                        <p id="btnsubmit">
+                                            <input type="submit" id="send" value="Send" class="btn btn-main" />
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="sidebar" class="col-md-4">
+                    <div class="de-box widget">
+                        <h4>Share With Friends</h4>
+                        <div class="small-border"></div>
+                        <div class="de-color-icons">
+                            <span><i class="fa fa-twitter fa-lg"></i></span>
+                            <span><i class="fa fa-facebook fa-lg"></i></span>
+                            <span><i class="fa fa-reddit fa-lg"></i></span>
+                            <span><i class="fa fa-linkedin fa-lg"></i></span>
+                            <span><i class="fa fa-pinterest fa-lg"></i></span>
+                            <span><i class="fa fa-stumbleupon fa-lg"></i></span>
+                            <span><i class="fa fa-delicious fa-lg"></i></span>
+                            <span><i class="fa fa-envelope fa-lg"></i></span>
+                        </div>
+                    </div>
+                    <div class="de-box widget widget-post">
+                        <h4>Recent Posts</h4>
+                        <div class="small-border"></div>
+                        <ul>
+
+                            @foreach (var item in Model.LastFourBlogs)
+                            {
+                                <li><span class="date">@item.Date.ToShortDateString()</span><a href="Blog/Posts/@item.Id">@item.Title</a></li>
+                            }
+
+
+                        </ul>
+                    </div>
+
+                    <div class="de-box widget widget-text">
+                        <h4>About Us</h4>
+                        <div class="small-border"></div>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                        beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
+                        sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                    </div>
+                    <div class="de-box widget widget_tags">
+                        <h4>Tags</h4>
+                        <div class="small-border"></div>
+                        <ul>
+                            <li><a href="#link">Art</a></li>
+                            <li><a href="#link">Application</a></li>
+                            <li><a href="#link">Design</a></li>
+                            <li><a href="#link">Entertainment</a></li>
+                            <li><a href="#link">Internet</a></li>
+                            <li><a href="#link">Marketing</a></li>
+                            <li><a href="#link">Multipurpose</a></li>
+                            <li><a href="#link">Music</a></li>
+                            <li><a href="#link">Print</a></li>
+                            <li><a href="#link">Programming</a></li>
+                            <li><a href="#link">Responsive</a></li>
+                            <li><a href="#link">Website</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- content close -->
+<script src="~/js/blogPosts.js"></script>

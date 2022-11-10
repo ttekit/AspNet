@@ -11,7 +11,7 @@ namespace mvc.DB
         public DbSet<GuestTicket> GuestTicket { get; set; }
         public DbSet<Options> Options { get; set; }
         public DbSet<BlogElem> BlogElem { get; set; }
-
+        public DbSet<Comments> Comments { get; set; }
         public RockfestDB(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 
@@ -53,54 +53,7 @@ namespace mvc.DB
                     new Options(18, "navBarLink", "Artists", "/#section-artists"),
                     new Options(19, "navBarLink", "Schedule", "/#section-schedule"),
                 };
-
-            BlogElem[] blogElems = new BlogElem[] {
-                new BlogElem() {
-                    Id = 1,
-                    Title = "Hematochezia nonpurchase alilonghi funt Istiophorus victualer incunabula",
-                    ImgSrc = "images/blog/1.jpg",
-                    ImgAlt = "",
-                    Content = "Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat..."
-                },
-                new BlogElem() {
-                    Id = 2,
-                    Title = "Corticipetally unentrance Ponerinae anthocyan multiserial parsonship penumbrous",
-                    ImgSrc = "images/blog/2.jpg",
-                    ImgAlt = "",
-                    Content = "Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat..."
-                },
-                new BlogElem() {
-                    Id = 3,
-                    Title = "Latching aphagia prostatelcosis gadolinium hemikaryon aftergrief ventricumbent Swab",
-                    ImgSrc = "images/blog/3.jpg",
-                    ImgAlt = "",
-                    Content = "Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat..."
-                },
-                new BlogElem(){
-                    Id = 4,
-                    Title = "Thermodynamicist aeolistic lipsanotheca nearaway Tamworth pycnid subtower",
-                    ImgSrc = "images/blog/4.jpg",
-                    ImgAlt = "",
-                    Content = "Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat..."
-                },
-                new BlogElem(){
-                    Id = 5,
-                    Title = "Unpresumptuously carnelian trochiscus echoic enmask myodynamiometer",
-                    ImgSrc = "images/blog/5.jpg",
-                    ImgAlt = "",
-                    Content = "Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat..."
-                },
-                new BlogElem(){
-                    Id = 6,
-                    Title = "Statesmanese pseudhemal steatite Wendish boxhaul equiprobability xylonic",
-                    ImgSrc = "images/blog/6.jpg",
-                    ImgAlt = "",
-                    Content = "Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur consequat..."
-                }
-        };
-
             modelBuilder.Entity<Options>().HasData(options);
-            modelBuilder.Entity<BlogElem>().HasData(blogElems);
         }
 
     }

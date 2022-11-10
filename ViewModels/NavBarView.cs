@@ -20,6 +20,7 @@ namespace mvc.ViewModels
         {
             _groupedOptions.Add(newOptionGrop);
         }
+
         public static NavBarOptionGroup GetOptionGroup(string name)
         {
             foreach(var group in _groupedOptions)
@@ -31,6 +32,10 @@ namespace mvc.ViewModels
             }
             return new NavBarOptionGroup();
         }
+        public static List<NavBarOptionGroup> GetAllGroupedOptions()
+        {
+            return _groupedOptions;
+        }
         public static List<Options> GetNonGroupOptions()
         {
             return _nonGroupOptions;
@@ -41,11 +46,7 @@ namespace mvc.ViewModels
             {
                 return false;
             }
-                return true;
-        }
-        public static List<NavBarOptionGroup> GetAllGroupedOptions()
-        {
-            return _groupedOptions;
+            return true;
         }
     }
 }

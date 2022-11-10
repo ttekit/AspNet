@@ -17,13 +17,13 @@ namespace mvc.Models
         {
             get
             {
-                return _rockfestDB.BlogElem.OrderBy(x => x.Title);
+                return _rockfestDB.BlogElem.OrderBy(x => x.Date);
             }
         }
 
         public BlogElem GetBlogElemById(int id)
         {
-            return _rockfestDB.BlogElem.Single(blogElem => blogElem.Id == id);
+            return _rockfestDB.BlogElem.First(blogElem => blogElem.Id == id);
         }
 
         public bool AddOneBlogElemToDataBase(BlogElem blogElem)
@@ -52,7 +52,10 @@ namespace mvc.Models
             }
         }
 
-
+        public IQueryable<BlogElem> GetLastPosts(int limit)
+        {
+            return _rockfestDB.BlogElem.OrderBy(x => x.Date).Take(limit);
+        }
 
         public int SaveChanges()
         {

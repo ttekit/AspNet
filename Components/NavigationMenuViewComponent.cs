@@ -19,7 +19,13 @@ namespace mvc.Components
             if (NavBarView.checkIsDataEmpty())
             {
                 NavBarView.SetNonGroupOptions(HomeController.OptionsRepository.GetOptionElemByGroup("navBarLink").ToList());
-                NavBarView.AddNewOptionGroup(new NavBarOptionGroup() { GroupedOptions = HomeController.OptionsRepository.GetOptionElemByGroup("link").ToList(), Name = "Pages" });
+                NavBarView.AddNewOptionGroup(
+                    new NavBarOptionGroup()
+                    {
+                        GroupedOptions = HomeController.OptionsRepository.GetOptionElemByGroup("link").ToList(),
+                        Name = "Pages"
+                    }
+                );
             }
             return View("NavigationMenu");
         }

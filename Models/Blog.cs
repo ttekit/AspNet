@@ -21,7 +21,7 @@ namespace mvc.Models
         }
         public static IEnumerable<BlogElem> BlogList
         {
-            get { return _blogList; }
+            get { return _blogList;}
         }
     }
 }

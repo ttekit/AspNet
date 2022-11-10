@@ -41,7 +41,10 @@
                                 <li>
                                     <a href="/">@optionsGroup.Name</a>
                                     <ul>
-                                        @{GetNavBarList(optionsGroup.GroupedOptions);}
+                                        @foreach (var elem in optionsGroup.GroupedOptions)
+                                        {
+                                            <li><a href=@elem.Href>@elem.Value</a></li>
+                                        }
                                     </ul>
                                 </li>
                             }

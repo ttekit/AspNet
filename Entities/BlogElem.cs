@@ -1,4 +1,6 @@
-﻿namespace mvc.Entities
+﻿using System;
+
+namespace mvc.Entities
 {
     public class BlogElem
     {
@@ -7,5 +9,6 @@
         public string ImgSrc { get; set; }
         public string ImgAlt { get; set; }
         public string Content { get; set; }
+        public DateTime Date { get; set; }
     }
 }
