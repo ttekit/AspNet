@@ -70,28 +70,35 @@
                                 <div>
                                     <input type='text' class="form-control d-none" value="@Model.BlogData.Id" required>
                                 </div>
-                                <form asp-controller="Blog" asp-action="AddNewCommentToPost" id='contact_form' class="form-border" method="post">
+                                @using (Html.BeginForm("AddNewCommentToPost", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
                                     <div id="alert-msg" class="alert-msg" asp-validation-summary="All">
                                         <label>Name</label>
                                         <div>
-                                            <input type='text' id='name' class="form-control" placeholder="Your Name" required>
+                                            <input type='text' id='name' name="Name" class="form-control" placeholder="Your Name" required>
                                         </div>
 
                                         <div>
-                                            <input type='text' id='Email' class="form-control" placeholder="Your Email" required>
+                                            <input type='text' id='Id' name="postId" class="form-control d-none" value=@Model.BlogData.Id required>
                                         </div>
 
+                                        <div>
+                                            <input type='text' id='Email' name="Email" class="form-control" placeholder="Your Email" required>
+                                        </div>
                                         <label>Message <span class="req">*</span></label>
 
                                         <div>
-                                            <textarea id='message' class="form-control" placeholder="Your Message" required></textarea>
+                                            <textarea id='message' class="form-control" name="Message" placeholder="Your Message" required></textarea>
                                         </div>
 
                                         <p id="btnsubmit">
                                             <input type="submit" id="send" value="Send" class="btn btn-main" />
                                         </p>
                                     </div>
-                                </form>
+                                    }
+@*                                <form asp-controller="Blog" asp-action="AddNewCommentToPost" id='contact_form' class="form-border" method="post">
+
+                                </form>*@
                             </div>
                         </div>
                     </div>

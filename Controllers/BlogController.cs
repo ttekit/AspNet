@@ -36,14 +36,16 @@ namespace mvc.Controllers
         }
 
         [HttpPost]
-        public ViewResult AddNewCommentToPost(Comments comment)
+        public RedirectResult AddNewCommentToPost(Comments comment)
         {
             if (ModelState.IsValid)
             {
-
-                return View("PostId", comment);
+                comment.Date = DateTime.Now;
+                var commentsDataBase = new CommentsRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+                commentsDataBase.AddOneCommentToPost(comment);
+                return Redirect("/Blog/Post/"+comment.postId);
             }
-            return View("Index");
+            return Redirect("/Blog");
         }
 
 
