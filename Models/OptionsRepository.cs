@@ -35,6 +35,32 @@ namespace mvc.Models
             }
             return false;
         }
+        public bool UpdateOption(Options options)
+        {
+            Options opt = _rockfestDB.Options.First(opt => opt.Id == options.Id);
+            if (opt != null)
+            {
+                opt.Group = options.Group;
+                opt.Value = options.Value;
+                opt.Href = options.Href;
+                opt.Icon = options.Icon;
+            }
+
+            if (this.SaveChanges() == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool RemoveOption(Options options)
+        {
+            _rockfestDB.Options.Remove(options);
+            if (this.SaveChanges() == 1)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public int SaveChanges()
         {

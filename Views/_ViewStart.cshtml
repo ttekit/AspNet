@@ -1,3 +1,14 @@
-﻿@{
-    Layout = "_Layout";
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var controller = ViewContext.RouteData.Values["controller"];
+
+
+    if (User.Identity.IsAuthenticated && controller.ToString() == "Admin")
+    {
+        Layout = "_AdmLayout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }

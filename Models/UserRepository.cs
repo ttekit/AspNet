@@ -1,5 +1,6 @@
 ﻿using mvc.DB;
 using mvc.Entities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace mvc.Models
@@ -23,7 +24,15 @@ namespace mvc.Models
         }
         public UserData GetUserWithLogin(string login)
         {
-            return _rockfestDB.UserData.First(userData => userData.Login == login);
+            return _rockfestDB.UserData.First(blogElem => blogElem.Login == login);
+        }        
+        public bool CheckIsUserRegisterd(string login)
+        {
+            if (_rockfestDB.UserData.Where(userData => userData.Login == login).Count() == 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool AddNewUserToDataBase(UserData userData)

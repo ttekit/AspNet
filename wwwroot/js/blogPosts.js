@@ -13,7 +13,7 @@
                                 <span class="d-image-wrap"><img alt="${item.imgAlt}" src="${item.imgSrc}" class="lazy"></span>
                             </div>
                             <div class="d-text">
-                                <a href="01_rockfest-blog-single.html"><h4>${item.title}</h4></a>
+                                <a href="Blog/Post/${item.id}"><h4>${item.title}</h4></a>
                                 <p>${item.content}</p>
                             </div>
                         </div>

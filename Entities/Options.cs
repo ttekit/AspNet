@@ -15,6 +15,13 @@
             Group = group;
             Value = value;
         }
-
+        public Options()
+        {
+            Id = -1;
+            Href = "";
+            Icon = "";
+            Group = "";
+            Value = "";
+        }
     }
 }
