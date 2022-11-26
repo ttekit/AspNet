@@ -18,11 +18,11 @@ namespace mvc.Components
         {
             if (NavBarView.checkIsDataEmpty())
             {
-                NavBarView.SetNonGroupOptions(HomeController.OptionsRepository.GetOptionElemByGroup("navBarLink").ToList());
+                NavBarView.SetNonGroupOptions(HomeController.OptionsRepository.GetOptionElemByGroupId(GroupRepository.GetGroupIdByName("navBarLink").Id).ToList());
                 NavBarView.AddNewOptionGroup(
                     new NavBarOptionGroup()
                     {
-                        GroupedOptions = HomeController.OptionsRepository.GetOptionElemByGroup("link").ToList(),
+                        GroupedOptions = HomeController.OptionsRepository.GetOptionElemByGroupId(GroupRepository.GetGroupIdByName("navBarLink").Id).ToList(),
                         Name = "Pages"
                     }
                 );

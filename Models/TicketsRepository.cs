@@ -18,7 +18,7 @@ namespace mvc.Models
         {
             get
             {
-                return _rockfestDB.Options.OrderBy(x => x.Group);
+                return _rockfestDB.Options.OrderBy(x => x.GroupId);
             }
         }
 

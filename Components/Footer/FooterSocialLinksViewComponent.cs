@@ -15,7 +15,7 @@ namespace mvc.Components
 
         public IViewComponentResult Invoke()
         {
-            return View("SocialLinks", HomeController.OptionsRepository.GetOptionElemByGroup("OurSocLinks").ToList());
+            return View("SocialLinks", HomeController.OptionsRepository.GetOptionElemByGroupId(GroupRepository.GetGroupIdByName("OurSocLinks").Id).ToList());
         }
     }
 }

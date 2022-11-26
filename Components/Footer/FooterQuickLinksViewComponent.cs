@@ -13,7 +13,7 @@ namespace mvc.Components
 
         public IViewComponentResult Invoke()
         {
-            return View("QuickLinks", HomeController.OptionsRepository.GetOptionElemByGroup("link").ToList());
+            return View("QuickLinks", HomeController.OptionsRepository.GetOptionElemByGroupId(GroupRepository.GetGroupIdByName("Link").Id).ToList());
         }
     }
 }

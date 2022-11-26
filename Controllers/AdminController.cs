@@ -40,6 +40,25 @@ namespace mvc.Controllers
                 return RedirectToAction("Login", "User");
             }
             return View("editOptions", HomeController.OptionsRepository.allOptions);
+        }           
+        [HttpGet]
+        public IActionResult editGroups()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            return View("editGroups", GroupRepository.AllGroups.ToList());
+        }   
+        
+        [HttpGet]
+        public List<Group> getOptionsGroupData()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return null;
+            }
+            return GroupRepository.AllGroups.ToList();
         }
 
         [HttpPost]
@@ -51,16 +70,54 @@ namespace mvc.Controllers
 
             }
             return "False";
-        }        
+        }                
         [HttpPost]
         public string removeOption(Options options)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return optionsRepository.RemoveOption(options).ToString();
+                return optionsRepository.RemoveOption(options.Id).ToString();
+            }
+            return "False";
+        }
+        [HttpPost]
+        public string addNewOption(Options options)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return optionsRepository.AddNewOptionToDataBase(options).ToString();
             }
             return "False";
         }
 
+
+        [HttpPost]
+        public string updateGroupData(Group group)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return GroupRepository.UpdateData(group).ToString();
+
+            }
+            return "False";
+        }
+        [HttpPost]
+        public string removeGroup(Group group)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return GroupRepository.RemoveGroup(group.Id).ToString();
+            }
+            return "False";
+        }
+        [HttpPost]
+        public string addNewGroup(Group group)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return GroupRepository.AddNewGroupToDataBase(group).ToString();
+            }
+            return "False";
+        }
     }
 }

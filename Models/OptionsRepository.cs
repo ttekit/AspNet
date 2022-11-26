@@ -18,12 +18,20 @@ namespace mvc.Models
         {
             get
             {
-                return _rockfestDB.Options.OrderBy(x => x.Group);
+                return _rockfestDB.Options.OrderBy(x => x.Id);
             }
         }
-        public IQueryable<Options> GetOptionElemByGroup(string group)
+        public IQueryable<Options> GetOptionElemByGroupId(int GroupId)
         {
-            return _rockfestDB.Options.Where(option => option.Group == group);
+            IQueryable<Options> tmp = _rockfestDB.Options.Where(option => option.GroupId == GroupId);
+            if(tmp != default)
+            {
+                return tmp;
+            }
+            else
+            {
+                return default;
+            }
         }
 
         public bool AddNewOptionToDataBase(Options options)
@@ -40,7 +48,7 @@ namespace mvc.Models
             Options opt = _rockfestDB.Options.First(opt => opt.Id == options.Id);
             if (opt != null)
             {
-                opt.Group = options.Group;
+                opt.GroupId = options.GroupId;
                 opt.Value = options.Value;
                 opt.Href = options.Href;
                 opt.Icon = options.Icon;
@@ -52,9 +60,9 @@ namespace mvc.Models
             }
             return false;
         }
-        public bool RemoveOption(Options options)
+        public bool RemoveOption(int id)
         {
-            _rockfestDB.Options.Remove(options);
+            _rockfestDB.Options.Remove(_rockfestDB.Options.First(opt => opt.Id == id));
             if (this.SaveChanges() == 1)
             {
                 return true;

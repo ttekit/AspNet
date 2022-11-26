@@ -1,0 +1,43 @@
+﻿#dataTable td{
+    min-height: 20px;
+    min-width: 25px;
+}
+.options-string {
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.options-btn {
+    border: 0;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.submit {
+    background-color: #69b734;
+}
+
+.remove {
+    background-color: #e63c0c;
+}
+
+    .remove:disabled {
+        background-color: #e8918e;
+        color: black;
+    }
+
+.addNewOption {
+    border: 0;
+    margin-bottom: 16px;
+    width: 100%;
+    background-color: #69b734;
+    color: white;
+    transition-duration: 0.5s;
+}
+.addNewOption:hover {
+    background-color: #02b734;
+}
