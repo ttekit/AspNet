@@ -150,7 +150,6 @@ namespace mvc.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 return GroupRepository.UpdateData(group).ToString();
-
             }
             return "False";
         }

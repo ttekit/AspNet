@@ -18,6 +18,14 @@ namespace mvc.Models
         public static void GetAllPostsFromDataBase()
         {
             _blogList = _blogRepository.blogElems.ToList();
+        }        
+        public static void GetPostByIds(List<CategoryPost> ids)
+        {
+            _blogList = new List<BlogElem>();
+            foreach(var postCat in ids)
+            {
+                _blogList.Add(_blogRepository.GetBlogElemById(postCat.Id));
+            }
         }
         public static IEnumerable<BlogElem> BlogList
         {

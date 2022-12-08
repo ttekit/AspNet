@@ -1,23 +1,21 @@
 ﻿window.addEventListener("load", () => {
 
-    $('.testingfield').iconpicker();
-
     $(".submit").on("click", (e) => {
         let container = e.target.parentElement.parentElement;
         let data = {
             Id: $(container).find("input[name^='Id']").val(),
-            Group: $(container).find("[name^='Group']").val(),
+            GroupId: $(container).find("[name^='Group']").val(),
             Value: $(container).find("input[name^='Value']").val(),
             Href: $(container).find("input[name^='Href']").val(),
             Icon: $(container).find("input[name^='Icon']").val(),
         };
-        console.log(data);
+
         $.ajax({
             url: '/admin/updateOptionData',
             type: 'POST',
             data: data,
-            success: function (data) {
-                console.log(data);
+            success: function (wdata) {
+                console.log(wdata);
                 Swal.fire({
                     title: "Success!",
                     text: "Option saved!",

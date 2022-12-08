@@ -22,7 +22,7 @@ namespace mvc.Components
                 NavBarView.AddNewOptionGroup(
                     new NavBarOptionGroup()
                     {
-                        GroupedOptions = HomeController.OptionsRepository.GetOptionElemByGroupId(GroupRepository.GetGroupIdByName("navBarLink").Id).ToList(),
+                        GroupedOptions = HomeController.OptionsRepository.GetOptionElemByGroupId(GroupRepository.GetGroupIdByName("link").Id).ToList(),
                         Name = "Pages"
                     }
                 );

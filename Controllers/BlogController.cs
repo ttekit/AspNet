@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using mvc.DB;
 using mvc.Entities;
@@ -21,18 +22,23 @@ namespace mvc.Controllers
         public BlogController(ILogger<BlogController> logger)
         {
             _logger = logger;
+            
             Blog.GetAllPostsFromDataBase();
         }
 
         [HttpPost]
-        public JsonResult GetAllPosts()
+        public List<BlogElem> GetAllPosts()
         {
-            return Json(Blog.BlogList);
+            return Blog.BlogList.ToList();
         }
 
         public IActionResult Index()
         {
-            return View("Index", GetAllPosts());
+            PostsCats postsCats = new PostsCats();
+            var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+            postsCats.BlogPost = GetAllPosts();
+            postsCats.Category = catRep.allCategories.ToList();
+            return View("Index", postsCats);
         }
 
         [HttpPost]
@@ -72,7 +78,16 @@ namespace mvc.Controllers
             );
         }
 
-
+        [HttpGet]
+        public List<BlogElem> GetCatsPosts(string catName)
+        {
+            var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+            var catPostRep = new CategoryBlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+            int catId = catRep.GetCategoryByName(catName).Id;
+            List<CategoryPost> blogCatCom = catPostRep.GetAllPostsWithCategoryId(catId.ToString()).ToList();
+            Blog.GetPostByIds(blogCatCom);
+            return Blog.BlogList.ToList();
+        }
 
     }
 }

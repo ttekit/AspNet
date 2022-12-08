@@ -24,7 +24,35 @@
     <!-- section begin -->
     <section aria-label="section">
         <div class="container">
-            <div class="row g-custom-x blogContainer">
+            <div class="row catsContainer">
+                <div class="d-content">
+                    <div class="d-text">
+                        @foreach (var cat in Model.Category)
+                        {
+                            <button class="catButton">@cat.CategoryName</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row g-custom-x">
+                <div class="blogContainer">
+                    @foreach (var post in Model.BlogPost)
+                    {
+                        <div class="col-lg-4 col-md-6 mb20">
+                            <div class="de-event-item">
+                                <div class="d-content">
+                                    <div class="d-image">
+                                        <span class="d-image-wrap"><img alt="@post.ImgAlt" src="@post.ImgSrc" class="lazy"></span>
+                                    </div>
+                                    <div class="d-text">
+                                        <a href="Blog/Post/@post.Id"><h4>@post.Title</h4></a>
+                                        <p>@post.Content</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
 
                 <div class="spacer-single"></div>
                 <nav aria-label="Page navigation example">
@@ -40,6 +68,7 @@
                         </li>
                     </ul>
                 </nav>
+
 
             </div>
         </div>
