@@ -1,10 +1,6 @@
 ﻿window.addEventListener("load", () => {
 
-    $('#test').iconpicker({
-        placement: "bottom",
-        showFooter: "true",
-        collision: "true"
-    });
+    $('.testingfield').iconpicker();
 
     $(".submit").on("click", (e) => {
         let container = e.target.parentElement.parentElement;

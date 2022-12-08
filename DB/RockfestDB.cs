@@ -12,6 +12,8 @@ namespace mvc.DB
         public DbSet<Group> OptionsGroup { get; set; }
         public DbSet<Options> Options { get; set; }
         public DbSet<BlogElem> BlogElem { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<CategoryPost> CategoryPosts { get; set; }
         public DbSet<Comments> Comments { get; set; }
         public DbSet<UserData> UserData { get; set; }
         public RockfestDB(DbContextOptions dbContextOptions) : base(dbContextOptions)

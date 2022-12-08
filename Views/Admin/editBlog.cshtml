@@ -1,0 +1,45 @@
+﻿<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <div class="card card-blue ">
+                        <div class="card-header">
+                            <h3 class="card-title">Управление постами в блоге</h3>
+                        </div>
+                        @foreach(var item in Model){
+                            <div class="card-body">
+                                <div class="post">
+                                    <h2>@item.Title</h2>
+                                    <div class="row">
+                                        <img class='blog-img-box-manage' src="@Url.Content(@item.ImgSrc)" width="450px"
+                                        alt="@item.ImgAlt">
+                                        <div class="post-manage flex-column">
+                                            <div class="d-none id">@item.Id</div>
+                                            <button href="#" class="btn btn-info btn-lg blog-edit-button blog-btn">
+                                                <i class="fas fa-info-circle">Edit</i>
+                                            </button>
+                                            <button href="#" class="btn btn-danger btn-lg blog-delete-button blog-btn">
+                                                <i class="fas fa-trash">Delete</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+</div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<script src="~/admin/js/postwork.js"></script>

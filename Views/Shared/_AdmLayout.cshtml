@@ -20,7 +20,7 @@
     <link href="//cdn.jsdelivr.net/npm/@@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <link href="~/admin/fontPicker/dist/css/fontawesome-iconpicker.min.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <style type="text/css">
 
 
@@ -95,7 +95,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/admin/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -121,6 +121,11 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/admin/fontPicker/dist/js/fontawesome-iconpicker.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
 </body>
 </html>

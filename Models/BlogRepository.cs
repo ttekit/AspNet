@@ -1,5 +1,6 @@
 ﻿using mvc.DB;
 using mvc.Entities;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -36,15 +37,24 @@ namespace mvc.Models
             return false;
         }
 
-        public void UpdateBlogElemInfo(int id, BlogElem blogElem)
+        public bool UpdateBlogElemInfo(int id, BlogElem blogElem)
         {
-           BlogElem blogEl = this.GetBlogElemById(id);
+            BlogElem blogEl = this.GetBlogElemById(id);
             if (blogEl != null && blogElem != null)
             {
                 blogEl.Title = blogElem.Title;
                 blogEl.ImgAlt = blogElem.ImgAlt;
                 blogEl.ImgSrc = blogElem.ImgSrc;
-                this.SaveChanges();
+                blogEl.Content = blogElem.Content;
+                blogEl.Date = blogElem.Date;
+                if (this.SaveChanges() == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -60,6 +70,17 @@ namespace mvc.Models
         public int SaveChanges()
         {
             return _rockfestDB.SaveChanges();
+        }
+
+        internal bool deletePost(int postId)
+        {
+            var post = _rockfestDB.BlogElem.First(post => post.Id == postId);
+            _rockfestDB.BlogElem.Remove(post);
+            if (this.SaveChanges() == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

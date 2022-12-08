@@ -41,3 +41,18 @@
 .addNewOption:hover {
     background-color: #02b734;
 }
+
+.addNewCategoryBtn {
+    background-color: #d5d5d5;
+    border-radius: 200px;
+    border: 0;
+    margin: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.pressed {
+    background-color: rgba(121,121,121,0.55);
+}
