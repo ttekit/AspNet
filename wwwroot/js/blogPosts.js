@@ -1,19 +1,6 @@
 ﻿$(document).ready(() => {
-    let catBtn = $(".catButton");
-    catBtn.on("click", function (e) {
-        let catName = e.target.innerHTML;
-        $.ajax({
-            url: "/Blog/GetCatsPosts",
-            method: "GET",
-            data: {
-                "catName": catName
-            },
-            success: (data) => {
-                let cont = $(".blogContainer");
-                cont.empty();
-                data.forEach((val, key) => {
-                    cont.append(`
-                        <div class="col-lg-4 col-md-6 mb20">
+    let getPostBlock = (val) => {
+        return $(`      <div class="col-lg-4 col-md-6 mb20">
                             <div class="de-event-item">
                                 <div class="d-content">
                                     <div class="d-image">
@@ -21,19 +8,43 @@
                                     </div>
                                     <div class="d-text">
                                         <a href="Blog/Post/${val.id}"><h4>${val.title}</h4></a>
-                                        <p>${val.content}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>`);
-                })
-            },
-            error: (err) => {
-                console.log(err)
-            }
+                        </div>
+                `);
+    }
+    let cont = $(".blogContainer");
+    let catBtn = $(".catButton");
 
+    catBtn.on("click", function (e) {
+        let catBtn = $(e.target);
+        cont.empty();
+        if(!catBtn.hasClass("activeCat")){
+            catBtn.addClass("activeCat");
+        }
+        else{
+            catBtn.removeClass("activeCat");
+        }
+        let allActiveBtns = $(".activeCat");
 
+        allActiveBtns.each((key, btn)=>{
+            console.log(btn.innerHTML);
+            $.ajax({
+                url: "/Blog/GetCatsPosts",
+                method: "GET",
+                data: {
+                    "catName":  btn.innerHTML
+                },
+                success: (data) => {
+                    data.forEach((val, key) => {
+                        cont.append(getPostBlock(val));
+                    })
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+            })
         })
-        console.log(catName);
     })
 })

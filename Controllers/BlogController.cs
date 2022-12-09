@@ -18,12 +18,11 @@ namespace mvc.Controllers
     public class BlogController : Controller
     {
         private readonly ILogger<BlogController> _logger;
+        private static BlogRepository _blogRepository = new BlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
 
         public BlogController(ILogger<BlogController> logger)
         {
-            _logger = logger;
-            
-            Blog.GetAllPostsFromDataBase();
+            _logger = logger;   
         }
 
         [HttpPost]
@@ -38,6 +37,7 @@ namespace mvc.Controllers
             var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
             postsCats.BlogPost = GetAllPosts();
             postsCats.Category = catRep.allCategories.ToList();
+            Blog.GetAllPostsFromDataBase();
             return View("Index", postsCats);
         }
 
@@ -58,16 +58,12 @@ namespace mvc.Controllers
         [Route("Blog/Post/{id?}")]
         public IActionResult Post(int id)
         {
-            Console.WriteLine(id);
             BlogRepository blogRepository = new BlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
             BlogElem blogData = blogRepository.GetBlogElemById(id);
             List<BlogElem> lastFourBlogs = blogRepository.GetLastPosts(4).ToList();
 
             CommentsRepository commentsRep = new CommentsRepository(new mvc.DB.RockfestDB(new DbContextOptions<RockfestDB>()));
             List<Comments> comments = commentsRep.GetCommentsByPostId(id);
-
-
-
 
             return View("Post", new BlogPost()
             {
@@ -83,11 +79,12 @@ namespace mvc.Controllers
         {
             var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
             var catPostRep = new CategoryBlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+
             int catId = catRep.GetCategoryByName(catName).Id;
-            List<CategoryPost> blogCatCom = catPostRep.GetAllPostsWithCategoryId(catId.ToString()).ToList();
-            Blog.GetPostByIds(blogCatCom);
-            return Blog.BlogList.ToList();
-        }
+
+
+            return catPostRep.GetAllPostsWithCategoryId(catId.ToString()).ToList(); ;
+        }   
 
     }
 }

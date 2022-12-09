@@ -1,6 +1,7 @@
 ﻿using mvc.DB;
 using mvc.Entities;
 using System;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.IO;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace mvc.Models
         {
             get
             {
-                return _rockfestDB.BlogElem.OrderBy(x => x.Date);
+                return _rockfestDB.BlogElem.OrderBy(x => x.Id);
             }
         }
 
@@ -27,9 +28,11 @@ namespace mvc.Models
             return _rockfestDB.BlogElem.First(blogElem => blogElem.Id == id);
         }
 
-        public bool AddOneBlogElemToDataBase(BlogElem blogElem)
+        public bool AddOneBlogElemToDataBase(BlogElem blogElem, int catId)
         {
             _rockfestDB.BlogElem.Add(blogElem);
+            this.SaveChanges();
+            _rockfestDB.CategoryPosts.Add(new CategoryPost(blogElem.Id, catId));
             if (this.SaveChanges() == 1)
             {
                 return true;

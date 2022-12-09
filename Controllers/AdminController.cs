@@ -101,6 +101,90 @@ namespace mvc.Controllers
         }
 
         [HttpPost]
+        public string deleteOnePost(int postId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var blogModel = new BlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+                var blogCatsModel = new CategoryBlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+                bool res = blogCatsModel.deleteRowByPostId(postId.ToString());
+                if (res)
+                {
+                    res = blogModel.deletePost(postId);
+                }
+                if (res)
+                {
+                    return res.ToString();
+                }
+            }
+            return "False";
+        }
+
+        public IActionResult addNewPost()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            var catsRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+            return View("addNewPost", catsRep.allCategories.ToList());
+        }
+
+        [HttpPost]
+        public string addNewPostAct()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var formData = Request.Form;
+                var keysData = formData.Keys.ToList();
+
+                var blogRep = new BlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+
+                var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+
+                BlogElem blogElem = new BlogElem(
+                    default,
+                    formData["Name"],
+                    "",
+                    "/",
+                    formData["Content"],
+                    DateTime.Now
+                );
+
+                bool res = blogRep.AddOneBlogElemToDataBase(blogElem, catRep.GetCategoryByName(formData["Category"]).Id);
+
+                if(res == true)
+                {
+                    if (formData.Files.Count == 1)
+                    {
+                        if (formData.Files[0].Length > 3 * 1024 * 1024)
+                        {
+                            throw new Exception("File is too big");
+                        }
+
+                        string pathToOptionImage = $"\\images\\blog\\" + blogElem.Id + System.IO.Path.GetExtension(formData.Files[0].FileName);
+                        string fullPath = Path.Join(_environment.WebRootPath,
+                                                    pathToOptionImage);
+
+
+                        blogElem.ImgSrc = pathToOptionImage;
+
+                        FileStream fileStream = new FileStream(fullPath, FileMode.Create);
+                        formData.Files[0].CopyTo(fileStream);
+                        fileStream.Close();
+                    };
+                }
+
+                res = blogRep.UpdateBlogElemInfo(blogElem.Id, blogElem);
+
+                return res.ToString();
+
+            }
+            return "False";
+        }
+
+
+        [HttpPost]
         public string updateOptionData(Options options)
         {
             if (User.Identity.IsAuthenticated)
@@ -110,18 +194,6 @@ namespace mvc.Controllers
             }
             return "False";
         }
-
-        [HttpPost]
-        public string deleteOnePost(int postId)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var blogModel = new BlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
-                return blogModel.deletePost(postId).ToString();
-            }
-            return "False";
-        }
-
 
         [HttpPost]
         public string removeOption(Options options)
@@ -142,6 +214,7 @@ namespace mvc.Controllers
             }
             return "False";
         }
+
 
 
         [HttpPost]
@@ -174,6 +247,9 @@ namespace mvc.Controllers
             return "False";
         }
 
+
+
+
         [HttpPost]
         public string updateProduct()
         {
@@ -189,7 +265,6 @@ namespace mvc.Controllers
                     formData["Content"],
                     DateTime.Now
                 );
-                //запись файла, есль он есть
                 if (formData.Files.Count == 1)
                 {
                     if (formData.Files[0].Length > 3 * 1024 * 1024)
@@ -214,7 +289,6 @@ namespace mvc.Controllers
                 var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
                 
                 var catBlogRep = new CategoryBlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
-
 
                 catBlogRep.UpdateCategoryOfPost(formData["id"], catRep.GetCategoryByName(formData["Category"]).Id);
 

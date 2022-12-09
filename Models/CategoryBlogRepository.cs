@@ -1,8 +1,10 @@
 ﻿using mvc.DB;
 using mvc.Entities;
 using System;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace mvc.Models
 {
@@ -17,7 +19,7 @@ namespace mvc.Models
 
         public bool AddNewCategoryToPost(string catId, string postId)
         {
-            _rockfestDB.CategoryPosts.Add(new CategoryPost() { CategoryId = catId, PostId = postId });
+            _rockfestDB.CategoryPosts.Add(new CategoryPost() { CategoryId = catId, PostId = int.Parse(postId) });
             if (this.SaveChanges() == 1)
             {
                 return true;
@@ -35,11 +37,22 @@ namespace mvc.Models
         }
         public CategoryPost GetCategoryPostByPostId(string postId)
         {
-            return _rockfestDB.CategoryPosts.First(catPost => catPost.PostId == postId);
+            return _rockfestDB.CategoryPosts.First(catPost => catPost.PostId.ToString() == postId);
         }
-        public IQueryable<CategoryPost> GetAllPostsWithCategoryId(string catId)
+        public IQueryable<BlogElem> GetAllPostsWithCategoryId(string catId)
         {
-            return _rockfestDB.CategoryPosts.Where(catPost => catPost.CategoryId == catId);
+
+            //SELECT*
+            //FROM BlogElem
+            //LEFT JOIN CategoryPosts ON CategoryPosts.PostId = BlogElem.Id
+            //WHERE CategoryId = 4
+            IQueryable<BlogElem> result = from post in _rockfestDB.BlogElem
+                              join cat in _rockfestDB.CategoryPosts
+                              on post.Id equals cat.PostId
+                              where cat.CategoryId == catId
+                              select post;
+
+            return result;
         }        
         public bool UpdateCategoryOfPost(string postId, int catId)
         {
@@ -62,6 +75,15 @@ namespace mvc.Models
             }
         }
 
+        public bool deleteRowByPostId(string postId)
+        {
+            _rockfestDB.CategoryPosts.Remove(_rockfestDB.CategoryPosts.First(row => row.PostId == int.Parse(postId)));
+            if (_rockfestDB.SaveChanges() == 1)
+            {
+                return true;
+            }
+            return false;
+        }
         public int SaveChanges()
         {
             return _rockfestDB.SaveChanges();

@@ -8,7 +8,16 @@ namespace mvc.Entities
         [ForeignKey("Categories")]
         public string CategoryId { get; set; }
         [ForeignKey("BlogElem")]
-        public string PostId { get; set; }
+        public int PostId { get; set; }
 
+        public CategoryPost()
+        {
+
+        }
+        public CategoryPost(int postId, int catId)
+        {
+            CategoryId = catId.ToString();
+            PostId = postId;
+        }
     }
 }

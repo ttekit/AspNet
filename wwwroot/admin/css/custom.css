@@ -56,3 +56,12 @@
 .pressed {
     background-color: rgba(121,121,121,0.55);
 }
+
+.addNewPost-button {
+    border: 0;
+    width: 100%;
+    background-color: #69b734;
+    border-radius: 3px;
+    color: white;
+    font-weight: 700;
+}
