@@ -39,25 +39,45 @@ namespace mvc.Models
         {
             return _rockfestDB.CategoryPosts.First(catPost => catPost.PostId.ToString() == postId);
         }
-        public IQueryable<BlogElem> GetAllPostsWithCategoryId(string catId)
-        {
 
+        public IQueryable<BlogElem> GetAllPostsWithCategoryId(string catId, int limit, int offset)
+        {
             //SELECT*
             //FROM BlogElem
             //LEFT JOIN CategoryPosts ON CategoryPosts.PostId = BlogElem.Id
             //WHERE CategoryId = 4
-            IQueryable<BlogElem> result = from post in _rockfestDB.BlogElem
-                              join cat in _rockfestDB.CategoryPosts
-                              on post.Id equals cat.PostId
-                              where cat.CategoryId == catId
-                              select post;
+            IQueryable<BlogElem> result;
+            if (catId != "*")
+            {
+                result = (from post in _rockfestDB.BlogElem
+                          join cat in _rockfestDB.CategoryPosts
+                          on post.Id equals cat.PostId
+                          where cat.CategoryId == catId
+                          select post).Skip(offset).Take(limit);
+            }
+            else
+            {
+                result = (from post in _rockfestDB.BlogElem
+                          join cat in _rockfestDB.CategoryPosts
+                          on post.Id equals cat.PostId
+                          select post).Skip(offset).Take(limit);
+            }
 
             return result;
-        }        
+        }
+
+        public int GetPostsCount(string catId)
+        {
+            return (from post in _rockfestDB.BlogElem
+                    join cat in _rockfestDB.CategoryPosts
+                    on post.Id equals cat.PostId
+                    where cat.CategoryId == catId
+                    select post).Count();
+        }
         public bool UpdateCategoryOfPost(string postId, int catId)
         {
             CategoryPost CatEl = this.GetCategoryPostByPostId(postId);
-            if (CatEl != null )
+            if (CatEl != null)
             {
                 CatEl.CategoryId = catId.ToString();
                 if (this.SaveChanges() == 1)

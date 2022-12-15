@@ -14,6 +14,10 @@ namespace mvc.Entities
         public DateTime Date { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("BlogElem")]
         public int postId { get; set; }
+        [ForeignKey("Comments")]
+        [DefaultValue(null)]
+        public int commentId { get; set; }
     }
 }

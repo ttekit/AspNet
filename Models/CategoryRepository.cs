@@ -30,11 +30,22 @@ namespace mvc.Models
                 return true;
             }
             return false;
+        }        
+
+        public bool UpdateCategoryCountByCatId(int id)
+        {
+            var category = _rockfestDB.Categories.FirstOrDefault(x => x.Id == id);
+            category.CategoryCount++; 
+            if (this.SaveChanges() == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public Categories GetCategoryByName(string name)
+        public Categories GetCategoryByName(string categoryName)
         {
-            return _rockfestDB.Categories.First(x => x.CategoryName == name);
+            return _rockfestDB.Categories.First(x => x.CategoryName == categoryName);
         }
         public int SaveChanges()
         {

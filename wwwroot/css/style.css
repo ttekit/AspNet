@@ -4922,7 +4922,7 @@ i.font60 {
     text-align: center;
 }
 
-.pagination li a {
+.pagination li button {
     font-size: 14px;
     color: #888;
     border: solid 1px #d2d2d2;
@@ -16059,7 +16059,8 @@ img {
     }
 }
 
-
-
+.swal2-title{
+    color: black !important;
+}
 
 @charset "UTF-8";

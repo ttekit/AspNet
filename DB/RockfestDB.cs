@@ -18,8 +18,8 @@ namespace mvc.DB
         public DbSet<UserData> UserData { get; set; }
         public RockfestDB(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+        //    Database.EnsureDeleted();
+        //    Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

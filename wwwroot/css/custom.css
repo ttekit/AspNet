@@ -20,3 +20,23 @@
 .activeCat {
     background-color: #6c1e1e !important;
 }
+.ans-btn {
+    
+    border: 0;
+    background-color: #131313;
+    color: white;
+    border-radius: 3px;
+}
+.get-ans-btn {
+    border: 0;
+    background-color: #131313;
+    color: white;
+    border-radius: 3px;
+}
+.btn-cont{
+    margin-top: 10px;
+}
+
+.numeric-pagination-container{
+    display: flex;
+}

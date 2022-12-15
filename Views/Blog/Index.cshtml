@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Blog";
 }
-
+<div class="postsCount">@Model.BlogPost.Count</div>
 <!-- content begin -->
 <div class="no-bottom no-top" id="content">
     <div id="top"></div>
@@ -21,6 +21,17 @@
         </div>
     </section>
     <!-- section close -->
+
+    <nav aria-label="Page posts count">
+        <ul class="pagination justify-content-center">
+            <li class="page-item activeCount"><button class="count-link">3</button></li>
+            <li class="page-item"><button class="count-link">5</button></li>
+            <li class="page-item"><button class="count-link">10</button></li>
+            <li class="page-item"><button class="count-link">15</button></li>
+            <li class="page-item"><button class="count-link">20</button></li>
+        </ul>
+    </nav>
+
     <!-- section begin -->
     <section aria-label="section">
         <div class="container">
@@ -29,7 +40,9 @@
                     <div class="d-text">
                         @foreach (var cat in Model.Category)
                         {
-                            <button class="catButton">@cat.CategoryName</button>
+                            @if (cat.CategoryName != null){
+                                <button class="catButton">@cat.CategoryName</button>
+                            }
                         }
                     </div>
                 </div>
@@ -53,16 +66,18 @@
                 </div>
             </div>
         <div class="spacer-single"></div>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <button class="page-link prew-pagination" tabindex="-1" aria-disabled="true">Previous</button>
+                </li>
+                <div class="numeric-pagination-container">
+                    <li class="page-item"><button class="page-link numeric-pagination">1</button></li>
+                    <li class="page-item"><button class="page-link numeric-pagination">2</button></li>
+                    <li class="page-item"><button class="page-link numeric-pagination">3</button></li>
+                </div>
+                <li class="page-item">
+                    <button class="page-link next-pagination">Next</button>
                 </li>
             </ul>
         </nav>
@@ -71,5 +86,5 @@
 
 </div>
 
-<script src="~/js/blogPosts.js"></script>
+<script src="~/js/blogWork.js"></script>
 <!-- content close -->

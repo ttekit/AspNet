@@ -23,6 +23,15 @@ namespace mvc.Models
             }
             return new List<Comments>();
         }
+        public List<Comments> GetCommentsByParrentCommentId(int parId)
+        {
+            var data = _rockfestDB.Comments.Where(x => x.commentId == parId);
+            if (data != null)
+            {
+                return data.ToList();
+            }
+            return new List<Comments>();
+        }
 
         public bool AddOneCommentToPost(Comments comment)
         {

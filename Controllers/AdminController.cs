@@ -150,10 +150,11 @@ namespace mvc.Controllers
                     formData["Content"],
                     DateTime.Now
                 );
+                var cat = catRep.GetCategoryByName(formData["Category"]);
+                blogRep.AddOneBlogElemToDataBase(blogElem, cat.Id);
+                bool res = catRep.UpdateCategoryCountByCatId(cat.Id);
 
-                bool res = blogRep.AddOneBlogElemToDataBase(blogElem, catRep.GetCategoryByName(formData["Category"]).Id);
-
-                if(res == true)
+                if (res == true)
                 {
                     if (formData.Files.Count == 1)
                     {

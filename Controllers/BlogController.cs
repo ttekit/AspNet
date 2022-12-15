@@ -7,10 +7,13 @@ using mvc.Entities;
 using mvc.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Xml.Linq;
 
 namespace mvc.Controllers
@@ -22,7 +25,7 @@ namespace mvc.Controllers
 
         public BlogController(ILogger<BlogController> logger)
         {
-            _logger = logger;   
+            _logger = logger;
         }
 
         [HttpPost]
@@ -49,9 +52,17 @@ namespace mvc.Controllers
                 comment.Date = DateTime.Now;
                 var commentsDataBase = new CommentsRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
                 commentsDataBase.AddOneCommentToPost(comment);
-                return Redirect("/Blog/Post/"+comment.postId);
+                return Redirect("/Blog/Post/" + comment.postId);
             }
             return Redirect("/Blog");
+        }
+
+        public string getSubComments(string parId)
+        {
+            var commentsDataBase = new CommentsRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+            var res = commentsDataBase.GetCommentsByParrentCommentId(int.Parse(parId));
+            return JsonSerializer.Serialize(res);
+
         }
 
 
@@ -75,16 +86,27 @@ namespace mvc.Controllers
         }
 
         [HttpGet]
-        public List<BlogElem> GetCatsPosts(string catName)
+        public List<BlogElem> GetCatsPosts(BlogPagination prms)
         {
-            var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
             var catPostRep = new CategoryBlogRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
 
-            int catId = catRep.GetCategoryByName(catName).Id;
+            if (prms.CategoryId != 0)
+            {
+                return catPostRep.GetAllPostsWithCategoryId(prms.CategoryId.ToString(), prms.CurrentCount, prms.Page * prms.CurrentCount).ToList();
+            }
+            else
+            {
+                return catPostRep.GetAllPostsWithCategoryId("*", prms.CurrentCount, prms.Page * prms.CurrentCount).ToList();
 
-
-            return catPostRep.GetAllPostsWithCategoryId(catId.ToString()).ToList(); ;
-        }   
+            }
+        }
+        [HttpGet]
+        public Categories GetCategoryData(string categoryName)
+        {
+            var catRep = new CategoryRepository(new DB.RockfestDB(new DbContextOptions<RockfestDB>()));
+            var res = catRep.GetCategoryByName(categoryName);
+            return res;
+        }
 
     }
 }
