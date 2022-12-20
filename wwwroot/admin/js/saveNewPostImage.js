@@ -51,7 +51,7 @@
             }
 
 
-            if (correctCount == 2) {
+            if (correctCount != 0) {
                 formData.append('Name', $("[name='title']").val());
                 formData.append('Content', $("#summernote").val());
                 formData.append('Id', $("[name='id']").val());
