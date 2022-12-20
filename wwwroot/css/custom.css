@@ -55,3 +55,12 @@
     border: 0;
     border-radius: 5px;
 }
+
+.empty-error-text {
+    color: snow;
+    font-weight: 1000;
+    font-family:'Yu Gothic';
+    text-align: center;
+    font-size: x-large;
+    margin-bottom: 60px;
+}

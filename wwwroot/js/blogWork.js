@@ -7,7 +7,7 @@ let numericButtonsContainer = $(".numeric-pagination-container");
 let nextPageButton = $(".next-pagination");
 
 let page = 0;
-let limit = 3;
+let limit = 12;
 let catId;
 
 let allPostsCount = $(".postsCount").text();
@@ -41,9 +41,14 @@ let refreshContainer = () => {
             "Page": page
         },
         success: (data) => {
-            data.forEach((val, key) => {
-                cont.append(getPostBlock(val));
-            })
+            if (data.length > 0) {
+                data.forEach((val, key) => {
+                    cont.append(getPostBlock(val));
+                })
+            }
+            else {
+                cont.append("<div class='empty-error-text'>Empty ;(</div>");
+            }
         },
         error: (err) => {
             console.log(err)
@@ -89,7 +94,7 @@ let getCategory = function (catName, callback) {
 }
 
 
-catBtn.on("click", function (e) {
+catBtn.on("click", (e)=> {
     if (e.target.classList.contains("activeCat")) {
         e.target.classList.remove("activeCat");
     } else {
@@ -107,7 +112,7 @@ catBtn.on("click", function (e) {
     }
 })
 
-pagBtn.on("click", function (e) {
+pagBtn.on("click", (e)=> {
     if (!e.target.classList.contains("activeCount")) {
         limit = e.target.innerHTML;
         page = 0;
@@ -143,3 +148,6 @@ prewPageButton.on("click", (e) => {
 
 
 refreshPaginationContainer();
+if (allPostsCount == 0) {
+    refreshContainer();
+}
