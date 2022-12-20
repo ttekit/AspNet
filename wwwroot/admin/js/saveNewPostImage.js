@@ -50,25 +50,15 @@
                 correctCount++;
             }
 
-            if (files == null) {
-                Swal.fire({
-                    title: "Error",
-                    text: "Logo must be!",
-                    icon: "error",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                correctCount = 0;
-            } else {
-                correctCount++;
-            }
 
             if (correctCount == 2) {
                 formData.append('Name', $("[name='title']").val());
                 formData.append('Content', $("#summernote").val());
                 formData.append('Id', $("[name='id']").val());
                 formData.append('Category', categories);
-                formData.append('Logo', files[0]);
+                if (files != null) {
+                    formData.append('Logo', files[0]);
+                }
 
 
                 $.ajax({

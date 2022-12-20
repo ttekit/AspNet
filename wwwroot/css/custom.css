@@ -1,42 +1,57 @@
-﻿.catsContainer{
+﻿.catsContainer {
     display: flex;
     margin: 4px;
     align-items: center;
     text-align: center;
 }
-.catsContainer button{
-    background-color: rgba(0, 0, 0, 0);
-    border: 5px solid;
-    color: white;
-    border-radius: 5px;
-    margin: 5px;
-    transition-duration: 0.3s;
-}
-    .catsContainer button:hover {
-        background-color: rgba(255, 255, 255, 0.8);
-        color: black;
+
+    .catsContainer button {
+        background-color: rgba(0, 0, 0, 0);
+        border: 5px solid;
+        color: white;
+        border-radius: 5px;
+        margin: 5px;
+        transition-duration: 0.3s;
     }
+
+        .catsContainer button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
 
 .activeCat {
     background-color: #6c1e1e !important;
 }
+
 .ans-btn {
-    
     border: 0;
     background-color: #131313;
     color: white;
     border-radius: 3px;
 }
+
 .get-ans-btn {
     border: 0;
     background-color: #131313;
     color: white;
     border-radius: 3px;
 }
-.btn-cont{
+
+.btn-cont {
     margin-top: 10px;
 }
 
-.numeric-pagination-container{
+.numeric-pagination-container {
     display: flex;
+}
+
+.selectData {
+    height: 100%;
+    border: 0;
+    border-radius: 5px;
+}
+
+.search-button {
+    border: 0;
+    border-radius: 5px;
 }
